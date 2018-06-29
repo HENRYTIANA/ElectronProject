@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ElectronProject Deal</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <title>ElectronProject Deal</title>
+  </head>
+  <style>
+    .entete{
+   
+    background-color: #003366;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 0px solid ;
+}
+  </style>
+  <body>
+    <header >
+      <div class="entete" >
+
+        
+             <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">DEALAB</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active">
+                                <a class="nav-link" href="#">Code Promo <span class="sr-only">(current)</span></a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Bon Plans</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Gratuit</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Discussions</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Menu</a>
+                              </li>
+                  
+                  
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+              </div>
+            </nav>
+                   
+       </div>
+
+      
+    </header>
+      
+         
+        <div class="table-responsive"> 
+        <table class="table">
+        <thead>
+          <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Description</th>
+              <th>Detail</th>
+            
+          </tr>
+        </thead>
+     <tbody>
+        <tr>
+        
+
+          <td><img src="https://static-pepper.dealabs.com/threads/thread_large/default/1238138_1.jpg" /></td>
+          <td>Enceinte Sans-fil Ultimate Ears UE Boom 2 - Olivet (45)</td>
+          <td>77,40€</td>
+          <td>un classique qui revient sous la barre des 100€ - prix de base FNAC exagéré  attention il est à 119,90 mais bien choisir vendeur tiers  caractéristiques:   Taux de transfert de don</td>
+          <td><a href="https://www.dealabs.com/bons-plans/enceinte-sans-fil-ultimate-ears-ue-boom-2-olivet-45-1238138">Voir détail</a></td>
+
+       
+      </tr>
+      <tr>
+          <td><img src="https://static-pepper.dealabs.com/threads/thread_large/default/1238421_1.jpg" /></td>
+          <td>Ecran PC 35" Acer Predator Z35BMIPHZ dalle VA 200 HZ Gsync"</td>
+          <td>599€</td>
+          <td>Présentation du moniteur ACER Predator Z35Désignation : ACER Predator Z35 (Z35bmiphz) Moniteur LCD 35 pouces (89 cm) Date de sortie (approx.) : Fin 2015 Caractéristiques techniques</td>
+          <td><a href="https://www.dealabs.com/bons-plans/ecran-pc-35-acer-predator-z35bmiphz-dalle-va-200-hz-gsync-1238421">Voir détail</a></td>
+      </tr>
+
+       <tr>
+          <td><img src="https://static-pepper.dealabs.com/threads/thread_large/default/1238346_2.jpg" /></td>
+          <td>Carte graphique Gigabyte GeForce GTX 1080 Turbo OC - 8Go</td>
+          <td>36€</td>
+          <td>Même prix sur Cdiscount  https://www.cdiscount.com/jeux-pc-video-console/consoles/console-atari-flashback-8-classic-game-hd-avec-man/f-1033906-857847003783.html   Belle offre</td>
+          <td><a href="https://www.dealabs.com/bons-plans/console-atari-flashback-8-105-jeux-edition-2017-2018-1238346">Voir détail</a></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+   
+
+
+
+
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+     <script src="js/jquery-3.3.1.min.js"></script>
+     <script src="js/bootstrap.js"></script>
+
+     <script>if (window.module) module = window.module;</script>
+    <script>
+
+      const rp = require('request-promise');
+      const cheerio = require('cheerio');
+      const options = {
+      uri: 'https://www.dealabs.com/hot',
+      transform: function (body) {
+        return cheerio.load(body);
+        }
+      };
+
+      rp(options)
+        .then(($) => {
+          var dlabList = [];
+
+          $('div [class=threadGrid]').each(function(index, element){
+
+            dlabList[index] = {};
+
+            dlabList[index]['nom'] = $(this).find('.thread-title--list').text();
+            dlabList[index]['description'] = $(this).find('.cept-description-container').text();
+            dlabList[index]['prix'] = $(this).find('.thread-price').text();
+            dlabList[index]['img'] = $(this).find('img').attr('src');
+            dlabList[index]['url'] = $(this).find('.thread-title--list').attr('href');
+            
+            
+
+
+
+            });
+
+          console.log(dlabList);
+          for(var i =0; i < dlabList.length; i++){
+              alert(i)
+            ;
+
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        
+      // You can also require other files to run in this process
+     // require('./renderer.js')
+    </script>
+  </body>
+</html>
+
