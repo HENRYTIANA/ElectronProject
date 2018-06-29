@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    
+
     <title>ElectronProject Deal</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <title>ElectronProject Deal</title>
@@ -145,9 +147,18 @@
 
             });
 
-          console.log(dlabList);
+         
           for(var i =0; i < dlabList.length; i++){
-              alert(i)
+             console.log(dlabList[i].nom);
+             console.log(dlabList[i].description);
+             console.log(dlabList[i].prix);
+             console.log(dlabList[i].img);
+             console.log(dlabList[i].url);
+            
+
+            $('body').prepend((dlabList[i].nom));
+
+              //alert(i)
             ;
 
           }
